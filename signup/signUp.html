@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="signUp.css">
+    <title>chatApp-SignUp page</title>
+</head>
+<body>
+   <div class="container">
+    <form onsubmit="userDetails(event)" >
+       
+        <h1>Sign Up</h1>
+        <p>Please Signup To Join Our Community &#128512; &#128151; </p>
+        <hr>
+
+        <label> <b>Name</b></label>
+      <input id='username' type="text"  placeholder="Enter  Name" name="username"   />
+    
+      <label><b> EmailId</b></label>
+      <input id='email' type="text"  placeholder="Enter Email"  name="emailId"  />
+
+      <label> <b>Phone Number</b></label>
+      <input id='phonenumber' type="phonenumber"  placeholder="Enter Number" name="phonenumber" required />
+      
+      <label><b> password</b></label>
+      <input id='password' type="password"  placeholder="password"  name="password" />
+
+       
+         
+    
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+    
+        
+          <button type="submit" class="signupbtn">Sign Up</button> <a href="login.html" >Existing User-Login here</a>
+          <ul id='listOfUsers'></ul>
+    </form>
+   </div>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+  <script src="signup.js">
+      
+  </script>
+   
+</body>
+</html>

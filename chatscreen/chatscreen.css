@@ -1,0 +1,30 @@
+*{
+    box-sizing: border-box;
+    
+}
+
+body{
+     background-color: rgb(246, 241, 241);
+    
+}
+.container{
+    background-color: rgb(141, 19, 143);
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.container form{
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+input{
+    width:300px;
+    overflow: hidden;
+}

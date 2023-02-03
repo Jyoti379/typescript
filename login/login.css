@@ -1,0 +1,52 @@
+*{
+    box-sizing: border-box;
+    
+}
+body{
+    background:linear-gradient( to right,#159957,#155799);
+   background-image: url("https://img.freepik.com/free-vector/messenger-concept-illustration_114360-860.jpg");
+   background-repeat: no-repeat;
+   background-position: 50px 150px;
+   background-size: inherit;
+    
+}
+
+.container{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin:72px 760px;
+    border: 3px solid rgb(147, 152, 148);
+    border-radius: 5px;
+    background:linear-gradient( to right,#9da3a0,#8236b1);
+    padding: 20px;
+    height: 500px;
+    width: 500px;
+
+}
+
+input[type=text], input[type=password]{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 30px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+ button{
+    background-color: #8236b1;
+    color: black;
+    margin: 4px;
+    margin-bottom: 15px;
+    border:#04AA6D ;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+   width: 20%;
+   opacity: 0.9;
+ }
+ button:hover {
+    opacity:4;
+    color:white;
+  }
