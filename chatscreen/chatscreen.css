@@ -23,8 +23,44 @@ body{
     text-decoration: none;
     font-size: 17px;
 }
+button{
+    color: purple;
+}
+button:hover{
+ background-color: blue;
+ color: white;
+ border-style: none;
+}
 
 input{
     width:300px;
     overflow: hidden;
+}
+
+#userbar{
+    right:0;
+    background-color:purple;
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom:30px;
+   overflow-x: hidden;
+   overflow-y: scroll;
+ padding-top: 20px;
+}
+.chatbar{
+    background:rgb(210, 174, 242);
+    height:35px;
+    width:305px;
+    color:#141415;margin:10px;
+    list-style:none;
+    left:0;
+    overflow:auto;
+    padding: 10px;
+}
+.chatbar:hover{
+    background-color: blue;
+    color:white;
 }

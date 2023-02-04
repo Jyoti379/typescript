@@ -1,3 +1,9 @@
+
+
+
+
+
+
 async function userMessage(event) {
   try {
     event.preventDefault();
@@ -45,19 +51,48 @@ window.addEventListener("DOMContentLoaded", () => {
   console.log(decodedToken);
   const isUser = decodedToken.userId;
   console.log(isUser)
-
+  
+    axios.get("http://localhost:3000/message/getuser")
+    .then(res=>{
+      console.log(res);
+      showChatBar(res.data.users);
+  
+    }) 
+  
+  
+ 
+setInterval(()=>{
   axios.get("http://localhost:3000/message/get-message", { headers: { "Authorization": token } })
-    .then(response => {
-      console.log(response);
+  .then(response => {
+    console.log(response);
 
-      const messageData = response.data.msg;
+    const messageData = response.data.msg;
 
-      showMessageOnScreen(messageData);
+    showMessageOnScreen(messageData);
 
-    }).catch(err => {
-      console.log(err);
-    })
+  }).catch(err => {
+    console.log(err);
+  })
+},10000)
+ 
+
+
 })
+
+function showChatBar(userdata){
+  const userbar=document.getElementById('userbar'); 
+  userbar.innerHTML='';
+  userdata.forEach(user=>{
+    const userList=`<li class="chatbar">  ${user.name}</li>`;
+    userbar.innerHTML +=userList;
+  })
+
+}
+
+
+
+
+
 function showMessageOnScreen(messageData) {
   const token = localStorage.getItem('token')
   const decodedToken = parseJwt(token)
@@ -73,7 +108,7 @@ function showMessageOnScreen(messageData) {
     
     childNode =
       `<ul style="list-style-type:none">
-    <li> ${message.username}:<p style="border:1px solid purple;border-radius:5px;background:white;height:35px;width:305px;color:#9400D3 ">${message.msg}</p></li>
+    <li> ${message.username}:<p style="border:1px solid purple;border-radius:5px;background:white;height:35px;width:305px;color:#9400D3;padding:10px; ">${message.msg}</p></li>
      </ul>`;
     parent.innerHTML = parent.innerHTML + childNode;
   })
