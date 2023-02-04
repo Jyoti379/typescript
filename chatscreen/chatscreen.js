@@ -17,8 +17,8 @@ async function userMessage(event) {
       msg,
       username
     }
-
-
+     localStorage.setItem('message',JSON.stringify(obj));
+     
 
 
     await axios.post("http://localhost:3000/message/add-message", obj, { headers: { "Authorization": token } })
@@ -47,6 +47,7 @@ function parseJwt(token) {
 window.addEventListener("DOMContentLoaded", () => {
 
   const token = localStorage.getItem('token')
+  const message=localStorage.getItem('message')
   const decodedToken = parseJwt(token)
   console.log(decodedToken);
   const isUser = decodedToken.userId;
@@ -58,11 +59,11 @@ window.addEventListener("DOMContentLoaded", () => {
       showChatBar(res.data.users);
   
     }) 
-  
-  
+   showMessageScreen()
+
  
-setInterval(()=>{
-  axios.get("http://localhost:3000/message/get-message", { headers: { "Authorization": token } })
+
+ axios.get("http://localhost:3000/message/get-message", { headers: { "Authorization": token } })
   .then(response => {
     console.log(response);
 
@@ -73,7 +74,7 @@ setInterval(()=>{
   }).catch(err => {
     console.log(err);
   })
-},10000)
+
  
 
 
@@ -113,4 +114,20 @@ function showMessageOnScreen(messageData) {
     parent.innerHTML = parent.innerHTML + childNode;
   })
 
+}
+function showMessageScreen(){
+ 
+ const message=localStorage.getItem('message')
+  const msg=JSON.parse(message);
+  console.log(msg)
+  const parent = document.getElementById('messagePop');
+  parent.innerHTML = `${msg.username} logged in`;
+
+  
+    childNode =
+    `<ul style="list-style-type:none">
+  <li><p style="border:1px solid purple;border-radius:5px;background:white;height:35px;width:305px;color:#9400D3;padding:10px; ">${msg.msg}</p></li>
+   </ul>`;
+  parent.innerHTML = parent.innerHTML + childNode;
+  
 }

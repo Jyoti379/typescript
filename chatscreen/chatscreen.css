@@ -5,6 +5,7 @@
 
 body{
      background-color: rgb(246, 241, 241);
+     overflow: scroll;
     
 }
 .container{
@@ -63,4 +64,8 @@ input{
 .chatbar:hover{
     background-color: blue;
     color:white;
+}
+#messagePop{
+    overflow:scroll;
+    margin-bottom: 30px;
 }
