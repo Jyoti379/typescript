@@ -17,7 +17,7 @@ async function userMessage(event) {
       msg,
       username
     }
-     localStorage.setItem('message',JSON.stringify(obj));
+  //   localStorage.setItem('message',JSON.stringify(obj));
      
 
 
@@ -47,29 +47,44 @@ function parseJwt(token) {
 window.addEventListener("DOMContentLoaded", () => {
 
   const token = localStorage.getItem('token')
-  const message=localStorage.getItem('message')
   const decodedToken = parseJwt(token)
   console.log(decodedToken);
   const isUser = decodedToken.userId;
   console.log(isUser)
-  
-    axios.get("http://localhost:3000/message/getuser")
+ 
+  axios.get("http://localhost:3000/message/getuser")
     .then(res=>{
       console.log(res);
       showChatBar(res.data.users);
   
     }) 
-   showMessageScreen()
-
+  // showMessageScreen()
+  const Message=localStorage.getItem('message');//read the message from LS
+ 
+// push the value in  an array
+   let msgArray=[];
+   msgArray.push(JSON.parse(Message))
+  
+  console.log(msgArray[0].length);
+  const lastmsg= msgArray[0][(msgArray[0].length-1)]
+  console.log(lastmsg) //lastmessage stored in ls
  
 
- axios.get("http://localhost:3000/message/get-message", { headers: { "Authorization": token } })
+axios.get("http://localhost:3000/message/get-message", { headers: { "Authorization": token } })
   .then(response => {
     console.log(response);
-
     const messageData = response.data.msg;
 
-    showMessageOnScreen(messageData);
+    localStorage.setItem('message',JSON.stringify(messageData))
+
+//if there is nothing in localstorage,then below condition works
+
+    if(lastmsg == undefined){
+     lastmsg = -1;
+    }
+    showMessageScreen(msgArray[0])
+
+ //showMessageOnScreen(messageData);
 
   }).catch(err => {
     console.log(err);
@@ -93,7 +108,7 @@ function showChatBar(userdata){
 
 
 
-
+//no localstorage only when get message api call is done
 function showMessageOnScreen(messageData) {
   const token = localStorage.getItem('token')
   const decodedToken = parseJwt(token)
@@ -115,19 +130,24 @@ function showMessageOnScreen(messageData) {
   })
 
 }
-function showMessageScreen(){
- 
- const message=localStorage.getItem('message')
-  const msg=JSON.parse(message);
-  console.log(msg)
+function showMessageScreen(msgdata){
+  const token = localStorage.getItem('token')
+  const decodedToken = parseJwt(token)
+  const userName = decodedToken.name;
+  console.log(userName)
   const parent = document.getElementById('messagePop');
-  parent.innerHTML = `${msg.username} logged in`;
+  parent.innerHTML = `${userName} logged in`;
 
-  
+
+  msgdata.forEach(msg=>{
+   
     childNode =
     `<ul style="list-style-type:none">
-  <li><p style="border:1px solid purple;border-radius:5px;background:white;height:35px;width:305px;color:#9400D3;padding:10px; ">${msg.msg}</p></li>
+  <li> ${msg.username}:<p style="border:1px solid purple;border-radius:5px;background:white;height:35px;width:305px;color:#9400D3;padding:10px; ">${msg.msg}</p></li>
    </ul>`;
   parent.innerHTML = parent.innerHTML + childNode;
+  })
+  
+  
   
 }
